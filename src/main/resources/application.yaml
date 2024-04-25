@@ -1,7 +1,2 @@
-spring:
-cache:
-  type: caffeine
-  caffeine:
-    spec: expireAfterAccess=5s
 server:
   port: 8003
