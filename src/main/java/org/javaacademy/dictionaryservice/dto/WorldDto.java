@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class WorldDto {
-    private String world;
-    private String description;
+    private String englishWord;
+    private String russianTranslation;
 }

@@ -22,9 +22,9 @@ public class DictionaryController {
         return dictionaryService.getAll();
     }
 
-    @GetMapping("/{name}")
-    public World getWorldByName(@PathVariable String name){
-        return dictionaryService.getByName(name);
+    @GetMapping("/{engWorld}")
+    public World getWorldByEnglishWorld(@PathVariable String engWorld){
+        return dictionaryService.getByEnglishWorld(engWorld);
     }
 
     @PostMapping
@@ -32,19 +32,18 @@ public class DictionaryController {
         return ResponseEntity.status(CREATED).body(dictionaryService.create(dto));
     }
 
-    @PutMapping("/{name}")
-    public ResponseEntity<?> updateWorldDescription(@PathVariable String name,@RequestBody WorldDto dto){
-        dictionaryService.updateWorldDescription(name, dto);
+    @PutMapping("/{engWorld}")
+    public ResponseEntity<?> updateWorldRussianTranslation(@PathVariable String engWorld,
+                                                           @RequestBody WorldDto dto){
+        dictionaryService.updateWorldRussianTranslation(engWorld, dto);
         return ResponseEntity.status(ACCEPTED).build();
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<?> deleteWorld(@PathVariable String name){
-        boolean result = dictionaryService.deleteByName(name);
+    @DeleteMapping("/{engWorld}")
+    public ResponseEntity<?> deleteWorld(@PathVariable String engWorld){
+        boolean result = dictionaryService.deleteByEnglishWorld(engWorld);
         return  result
                 ? ResponseEntity.status(ACCEPTED).build()
                 : ResponseEntity.status(NOT_FOUND).build();
-
     }
-
 }

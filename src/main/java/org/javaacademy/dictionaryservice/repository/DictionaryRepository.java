@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 @Component
 public class DictionaryRepository {
-    Comparator<World> worldComparator = Comparator.comparing(World::getWorld);
+    Comparator<World> worldComparator = Comparator.comparing(World::getEnglishWord);
     private final TreeSet<World> worlds = new TreeSet<>(worldComparator);
 
     /**
@@ -30,28 +30,31 @@ public class DictionaryRepository {
     /**
      * Find unique world (READ)
      */
-    public World findByName(String name) {
-        return findByWorldName(name);
+    public World findEnglishWorld(String engWorld) {
+        return findByEnglishWorld(engWorld);
     }
 
     /**
      * UPDATE
      */
-    public void updateWorldDescription(String name, String description) {
-        findByWorldName(name).setDescription(description);
+    public void updateWorldRussianTranslation(String engWorld, String russianTranslation) {
+        findByEnglishWorld(engWorld).setRussianTranslation(russianTranslation);
     }
 
     /**
      * Delete (DELETE)
      */
-    public boolean deleteByName(String name) {
-        World byName = findByWorldName(name);
-        return worlds.remove(byName);
+    public boolean deleteByEnglishWorld(String engWorld) {
+        World byEnglishWorld = worlds.stream()
+                .filter(world -> world.getEnglishWord().equals(engWorld))
+                .findFirst()
+                .orElse(null);
+        return worlds.remove(byEnglishWorld);
     }
 
-    private World findByWorldName(String name) {
+    private World findByEnglishWorld(String engWorld) {
         return worlds.stream()
-                .filter(world -> world.getWorld().equals(name))
+                .filter(world -> world.getEnglishWord().equals(engWorld))
                 .findFirst()
                 .orElseThrow(() ->
                         new NoSuchElementException("Такого слова нет"));

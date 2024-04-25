@@ -14,7 +14,7 @@ public class DictionaryService {
     private final DictionaryRepository dictionaryRepository;
 
     public World create(WorldDto dto) {
-        World world = new World(dto.getWorld(), dto.getDescription());
+        World world = new World(dto.getEnglishWord(), dto.getRussianTranslation());
         return dictionaryRepository.add(world);
     }
 
@@ -22,16 +22,16 @@ public class DictionaryService {
         return dictionaryRepository.getAll();
     }
 
-    public World getByName(String name) {
-        return dictionaryRepository.findByName(name);
+    public World getByEnglishWorld(String engWorld) {
+        return dictionaryRepository.findEnglishWorld(engWorld);
 
     }
 
-    public void updateWorldDescription(String name, WorldDto dto) {
-        dictionaryRepository.updateWorldDescription(name, dto.getDescription());
+    public void updateWorldRussianTranslation(String engWorld, WorldDto dto) {
+        dictionaryRepository.updateWorldRussianTranslation(engWorld, dto.getRussianTranslation());
     }
 
-    public boolean deleteByName(String name) {
-        return dictionaryRepository.deleteByName(name);
+    public boolean deleteByEnglishWorld(String engWorld) {
+        return dictionaryRepository.deleteByEnglishWorld(engWorld);
     }
 }

@@ -6,7 +6,7 @@ import lombok.NonNull;
 @Data
 public class World {
     @NonNull
-    private String world;
+    private String englishWord;
     @NonNull
-    private String description;
+    private String russianTranslation;
 }
