@@ -1,6 +1,7 @@
 package org.javaacademy.dictionaryservice.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.javaacademy.dictionaryservice.dto.WorldDto;
 import org.javaacademy.dictionaryservice.dto.WorldDtoRq;
 import org.javaacademy.dictionaryservice.dto.WorldDtoRs;
@@ -40,7 +41,9 @@ public class DictionaryService {
         return dictionaryRepository.deleteByEnglishWorld(engWorld);
     }
 
+    @SneakyThrows
     public WorldDto<List<WorldDtoRs>> getWorlds(Integer startElement, Integer pageSize) {
+        Thread.sleep(3000);
         int totalSize = dictionaryRepository.getAll().size();
         List<WorldDtoRs> worldDtoRs = dictionaryRepository.getAll()
                 .stream()

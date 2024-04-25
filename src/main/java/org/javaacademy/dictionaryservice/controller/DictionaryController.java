@@ -6,6 +6,10 @@ import org.javaacademy.dictionaryservice.dto.WorldDtoRq;
 import org.javaacademy.dictionaryservice.dto.WorldDtoRs;
 import org.javaacademy.dictionaryservice.entity.World;
 import org.javaacademy.dictionaryservice.service.DictionaryService;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +20,7 @@ import static org.springframework.http.HttpStatus.*;
 @RestController
 @RequestMapping("/dictionary")
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "getWorlds")
 public class DictionaryController {
     private final DictionaryService dictionaryService;
 
@@ -30,6 +35,7 @@ public class DictionaryController {
     }
 
     @PostMapping
+    @CacheEvict(cacheNames = "findLimit", allEntries = true)
     public ResponseEntity<WorldDtoRs> createWorld(@RequestBody WorldDtoRq dto) {
         return ResponseEntity.status(CREATED).body(dictionaryService.create(dto));
     }
@@ -50,8 +56,11 @@ public class DictionaryController {
     }
 
     @GetMapping("/world")
+    @Cacheable(cacheNames = "getWorlds")
+    @CachePut(cacheNames = "getWorlds", condition = "#refresh==true")
     public WorldDto<List<WorldDtoRs>> getWorlds(@RequestParam Integer startElement,
-                                                @RequestParam Integer pageSize) {
+                                                @RequestParam Integer pageSize,
+                                                @RequestParam(required = false) boolean refresh) {
         return dictionaryService.getWorlds(startElement, pageSize);
     }
 }
