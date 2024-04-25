@@ -15,9 +15,8 @@ public class DictionaryRepository {
     /**
      * Create
      */
-    public World add(World world) {
+    public void add(World world) {
         worlds.add(world);
-        return world;
     }
 
     /**
@@ -38,7 +37,7 @@ public class DictionaryRepository {
      * UPDATE
      */
     public void updateWorldRussianTranslation(String engWorld, String russianTranslation) {
-        findByEnglishWorld(engWorld).setRussianTranslation(russianTranslation);
+        findByEnglishWorld(engWorld).setRussianDescription(russianTranslation);
     }
 
     /**

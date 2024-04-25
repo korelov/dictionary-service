@@ -8,5 +8,5 @@ public class World {
     @NonNull
     private String englishWord;
     @NonNull
-    private String russianTranslation;
+    private String russianDescription;
 }
