@@ -35,7 +35,6 @@ public class DictionaryController {
     }
 
     @PostMapping
-    @CacheEvict(cacheNames = "findLimit", allEntries = true)
     public ResponseEntity<WorldDtoRs> createWorld(@RequestBody WorldDtoRq dto) {
         return ResponseEntity.status(CREATED).body(dictionaryService.create(dto));
     }
