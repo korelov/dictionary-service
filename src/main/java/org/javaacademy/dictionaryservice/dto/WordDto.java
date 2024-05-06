@@ -1,9 +1,9 @@
 package org.javaacademy.dictionaryservice.dto;
 
-import lombok.Data;
+import lombok.Value;
 
-@Data
-public class WorldDtoRq {
+@Value
+public class WordDto {
     private String englishWord;
     private String russianDescription;
 }

@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class World {
+public class Word {
     @NonNull
     private String englishWord;
     @NonNull

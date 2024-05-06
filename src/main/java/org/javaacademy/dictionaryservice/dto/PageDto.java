@@ -4,15 +4,15 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class WorldDto<T> {
+public class PageDto<T> {
     @NonNull
-    private Integer size;
+    private Integer startPosition;
+    @NonNull
+    private Integer endElementIndex;
     @NonNull
     private Integer totalSize;
     @NonNull
-    private Integer startElementIndex;
-    @NonNull
-    private Integer endElementIndex;
+    private Integer portionSize;
     @NonNull
     private T content;
 }
